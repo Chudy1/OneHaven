@@ -1,0 +1,25 @@
+{
+  "name": "onehaven_qa",
+  "version": "1.0.0",
+  "description": "This project automates testing of the OneHaven Mock API using Postman and Newman.\r It includes both positive (happy path) and negative test cases for all endpoints.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:api": "newman run automation/OneHaven_QA_Challenge_Mock_API.postman_collection.json -e automation/OneHaven.postman_environment.json -r cli,html --reporter-html-export results/newman-report.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chudy1/OneHaven.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Chudy1/OneHaven/issues"
+  },
+  "homepage": "https://github.com/Chudy1/OneHaven#readme",
+  "devDependencies": {
+    "newman": "^6.2.1"
+  }
+}

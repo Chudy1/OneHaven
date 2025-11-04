@@ -1,0 +1,2237 @@
+{
+	"info": {
+		"_postman_id": "f02b393d-d9d8-4058-ba49-47a51fcb2a2e",
+		"name": "OneHaven QA Challenge Mock API",
+		"description": "Mock API collection for OneHaven QA take-home test. Includes authentication, device linking, screen time rules, and reporting endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20000859",
+		"_collection_link": "https://gold-capsule-302232.postman.co/workspace/Benin-ESF-Integration-testing~c48ed830-a7f3-4cb9-a95e-f07f26fa575d/collection/20000859-f02b393d-d9d8-4058-ba49-47a51fcb2a2e?action=share&source=collection_link&creator=20000859"
+	},
+	"item": [
+		{
+			"name": "Auth - Signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Signup response has success status\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains userId and email\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"userId\");\r",
+							"    pm.expect(jsonData).to.have.property(\"email\");\r",
+							"});\r",
+							"\r",
+							"// Save userId as a variable for later requests\r",
+							"pm.environment.set(\"userId\", pm.response.json().userId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"parent@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/auth/signup",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Auth - Signup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"parent@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 18:30:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=90fa03199a87c643"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=d38895f358dd0415"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762194696"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"10f-iQ/6cTHOHhQG6g/jbUGqClHk7Zg\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "156"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=PObQFYI4IC_UjTo20kqWemKxiaiGjadLCY4Wbs6hLa4-1762194636-1.0.1.1-eIM0wettWkKsptGnTkETvEJXncOGeoCipYzbEtyG.8cCGAU.1KrSZEx2ieoFqZg0UgM61otHjfsrr5RslB9Dk3okXm5i7jWqsK3ZjhTdcjS_OIIS6_DsXQfMuBOmn_9C; path=/; expires=Mon, 03-Nov-25 19:00:36 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998df19b1f809460-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"success\",\n  \"message\": \"User registered successfully\",\n  \"userId\": \"user_12345\",\n  \"email\": \"parent@example.com\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Auth - Signup Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Signup response has error status\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"error\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains status and message\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"existingemail@example.com\",\n  \"password\": \"Password1233!\",\n  \"firstName\": \"Johen\",\n  \"lastName\": \"Deoe\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/auth/signup",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Auth - Signup Negative",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"existingemail@example.com\",\n  \"password\": \"Password1233!\",\n  \"firstName\": \"Johen\",\n  \"lastName\": \"Deoe\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 04 Nov 2025 14:49:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9994eba09fa29553-LHR"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=90fa03199a87c643"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=d38895f358dd0415"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762194696"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"10f-iQ/6cTHOHhQG6g/jbUGqClHk7Zg\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "199"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=PObQFYI4IC_UjTo20kqWemKxiaiGjadLCY4Wbs6hLa4-1762194636-1.0.1.1-eIM0wettWkKsptGnTkETvEJXncOGeoCipYzbEtyG.8cCGAU.1KrSZEx2ieoFqZg0UgM61otHjfsrr5RslB9Dk3okXm5i7jWqsK3ZjhTdcjS_OIIS6_DsXQfMuBOmn_9C; path=/; expires=Mon, 03-Nov-25 19:00:36 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=NO5ilXr.Zg3a1llw2aEPs7zTORW5qdf3btEhjl8KbZk-1762267405-1.0.1.1-1_h6j23MwfmkKL7gFyZxYayT3gbF9IXu3_6QtZ3pP7NQIXANl7vjVsLBFgpte3DVRpghfL57OwbK55YWfF.NWJYg17lAfJ1ReQanIvFe0hHwzmwWz9IQA7wwdx4YQM2v; path=/; expires=Tue, 04-Nov-25 15:13:25 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=Jg.XRlXQM8f76_wsVYEUj9qZocjnN7DzyCCYADZYioM-1762267791-1.0.1.1-SPP6gYMJhKAdcZ_.AaE2C53fwh.xZvoBgKsRHXqVargEMpNknbeyWqoFpfx7WFvsKsTN84LWNRYorQEOszhM_0IElnDuJaVVDfdSE8ELJUple3_48mNeV0pYbp56M0Or; path=/; expires=Tue, 04-Nov-25 15:19:51 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"User Already Exists\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Auth - Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Check status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// ✅ Validate login success message\r",
+							"pm.test(\"Login response has success status\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Check token is present\r",
+							"pm.test(\"Response contains token\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"token\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Save token for next requests\r",
+							"const token = pm.response.json().token;\r",
+							"pm.environment.set(\"auth_token\", token);\r",
+							"\r",
+							"// ✅ Optional: Log it in Postman console for visibility\r",
+							"console.log(\"Auth Token:\", token);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"parent@example.com\",\n  \"password\": \"Password123!\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Auth - Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"parent@example.com\",\n  \"password\": \"Password123!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 18:36:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=d7e1c03b1b113b9a"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=1ff62eefd1df525b"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762195064"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "124"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=f69c82KP.43g9qT_XZteoGeaH_AuHCkqVYZVQzKIPWg-1762195004-1.0.1.1-6I5opptj_lZB9p_YcSSBKrWPvCygtK8UAcfxS5Pbf1v7OOdWcDHxnTIBrtEp0kaQqmLrXm7heN.3IP1uEWNbkZ0LavQfSAkh7dWv5Ct4038; path=/; expires=Mon, 03-Nov-25 19:06:44 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998dfa995e1e1520-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"success\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI\",\n  \"user\": {\n    \"id\": \"user_12345\",\n    \"email\": \"parent@example.com\",\n    \"role\": \"parent\"\n  },\n  \"expiresIn\": 3600\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Auth - Login Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Check status code\r",
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"// ✅ Validate login success message\r",
+							"pm.test(\"Login response has error status\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"error\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"parent@example.com\",\n  \"password\": \"worngpassword!\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Auth - Login Negative",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"parent@example.com\",\n  \"password\": \"worngpassword!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 04 Nov 2025 14:39:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9994dbd13c47535c-LHR"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=d7e1c03b1b113b9a"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=1ff62eefd1df525b"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762195064"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "149"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=f69c82KP.43g9qT_XZteoGeaH_AuHCkqVYZVQzKIPWg-1762195004-1.0.1.1-6I5opptj_lZB9p_YcSSBKrWPvCygtK8UAcfxS5Pbf1v7OOdWcDHxnTIBrtEp0kaQqmLrXm7heN.3IP1uEWNbkZ0LavQfSAkh7dWv5Ct4038; path=/; expires=Mon, 03-Nov-25 19:06:44 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=AyVwCVETGukKfsxVE6yTxWK9ldcEJ7imvjjp6kBYmCU-1762267144-1.0.1.1-gRqx92Ma3V_d88t2BPd78S9x3T.CfukZp64E6UmoFoq3HaNojL8R7HcVDG32kUc3D9ic8E2Mgi4XoDtzX5ch_P2c0HOPq1UjguCYhxAoFlo; path=/; expires=Tue, 04-Nov-25 15:09:04 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Invalid email or password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Devices - Link Device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Check status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// ✅ Validate success message\r",
+							"pm.test(\"Device linked successfully message is returned\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"    pm.expect(jsonData.message).to.include(\"Device linked successfully\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Ensure required fields are present\r",
+							"pm.test(\"Response contains linkId, memberName, and deviceId\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.link).to.have.property(\"linkId\");\r",
+							"    pm.expect(jsonData.link).to.have.property(\"memberName\");\r",
+							"    pm.expect(jsonData.link).to.have.property(\"deviceId\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Store linkId for later use (e.g. fetching devices)\r",
+							"const linkId = pm.response.json().linkId;\r",
+							"pm.environment.set(\"linkId\", linkId);\r",
+							"\r",
+							"console.log(\"Saved linkId:\", linkId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"memberName\": \"Emma Doe\",\n  \"deviceId\": \"d001\",\n  \"relationship\": \"Daughter\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/devices/link",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"devices",
+						"link"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Devices - Link Device",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"memberName\": \"Emma Doe\",\n  \"deviceId\": \"d001\",\n  \"relationship\": \"Daughter\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/devices/link",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"link"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 18:39:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=f68495345300bd58"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=02adb6b46567e357"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762195258"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "198"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=ObGXipaf.5aTMryHzKDfWcyEgOCbnY8XTG7LvYMcxpI-1762195198-1.0.1.1-6_SixNWoe9Zq0zXoYQJUHdijfT99hHb77XYPuQ8tBLP0Q1pGIGD_ms6Dd9EicjyIB3UfuQhh6.yWpu1ucOneIQpQIoHHXhFikDy4yX5rYic; path=/; expires=Mon, 03-Nov-25 19:09:58 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998dff544f4f93ff-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"success\",\n  \"message\": \"Device linked successfully\",\n  \"link\": {\n    \"linkId\": \"link_789\",\n    \"deviceId\": \"d001\",\n    \"memberId\": \"member_456\",\n    \"memberName\": \"Emma Doe\",\n    \"relationship\": \"Daughter\",\n    \"linkedBy\": \"user_12345\",\n    \"status\": \"active\"\n  }\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Devices - Link Device Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Check status code\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"// ✅ Validate success message\r",
+							"pm.test(\"Device linked error message is returned\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"error\");\r",
+							"    pm.expect(jsonData.message).to.include(\"Device not found. Please check the device ID and try again.\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Ensure required fields are present\r",
+							"pm.test(\"Response contains status, message\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Store linkId for later use (e.g. fetching devices)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"memberName\": \"Emma Doe\",\n  \"deviceId\": \"invalidDevice001\",\n  \"relationship\": \"Daughter\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/devices/link",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"devices",
+						"link"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Devices - Link Device Negative",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"memberName\": \"Emma Doe\",\n  \"deviceId\": \"invalidDevice001\",\n  \"relationship\": \"Daughter\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/devices/link",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices",
+								"link"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 04 Nov 2025 15:07:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9995050ea856789f-LHR"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=f68495345300bd58"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=02adb6b46567e357"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762195258"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "935"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=ObGXipaf.5aTMryHzKDfWcyEgOCbnY8XTG7LvYMcxpI-1762195198-1.0.1.1-6_SixNWoe9Zq0zXoYQJUHdijfT99hHb77XYPuQ8tBLP0Q1pGIGD_ms6Dd9EicjyIB3UfuQhh6.yWpu1ucOneIQpQIoHHXhFikDy4yX5rYic; path=/; expires=Mon, 03-Nov-25 19:09:58 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=Hb9liIOcVVIkKpg3qz7_HK2RKVgYq9TBsRt4ICEkSx8-1762268613-1.0.1.1-Pt4r_b93G.0BbxpX33n8Nxo.z1T6TiS4IqwUnT.sW7omJa0dyXlaFBiaZxjN80TONpspFJz7HoNWbVJkViKIXi.9ECh93NYUIyN.SrkgV4Q; path=/; expires=Tue, 04-Nov-25 15:33:33 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=vRE_1H_BZMrzx9z5EANjNwrInVRLHKrerF4zOPcIJ.M-1762268834-1.0.1.1-JvxQ81ScCLIz6wvVIVnxaj4noyo4uz_P2K6IkmbKTpzcg7WFDOj31tVglO5l1F.FSajOf0sOr4p8wQfl7KDCg_BMqqolNIRGgXzZ45Yi2jc; path=/; expires=Tue, 04-Nov-25 15:37:14 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Device not found. Please check the device ID and try again.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Devices - Get Devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Verify status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// ✅ Ensure devices array exists and has at least one device\r",
+							"pm.test(\"Devices array is returned and not empty\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"devices\");\r",
+							"    pm.expect(jsonData.devices).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData.devices.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"// ✅ Store the first deviceId for later use (e.g., in rules)\r",
+							"if (pm.response.json().devices && pm.response.json().devices.length > 0) {\r",
+							"    const firstDeviceId = pm.response.json().devices[0].deviceId;\r",
+							"    pm.environment.set(\"deviceId\", firstDeviceId);\r",
+							"    console.log(\"Saved deviceId:\", firstDeviceId);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/devices",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"devices"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Devices - Get Devices",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/devices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 19:01:47 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=9bda24ed7ef91a51"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=ad1c999a92b76341"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762196567"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "138"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=_rO9rIf1rwV.DwWbEDUAVhJmnZzqWbEYfTX72O5A4UQ-1762196507-1.0.1.1-lZC1g3_3v23dSS11pZ_Dh7W7dW6P2y3n_GpD9takQEZkWO7gUxxU8nGbGOEiPGEG00QFNRmvLjzcYabI1hCAMGphU9M_cYZYQnqfy3GPsyE; path=/; expires=Mon, 03-Nov-25 19:31:47 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998e1f4bce5386d0-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n    \"status\": \"success\",\n    \"devices\": [\n        {\n            \"linkId\": \"link_789\",\n            \"deviceId\": \"d001\",\n            \"memberId\": \"member_456\",\n            \"memberName\": \"Emma Doe\",\n            \"relationship\": \"Daughter\",\n            \"linkedBy\": \"user_12345\",\n            \"linkedAt\": \"2025-11-03T10:15:30Z\",\n            \"status\": \"active\"\n        },\n        {\n            \"linkId\": \"link_790\",\n            \"deviceId\": \"d002\",\n            \"memberId\": \"member_457\",\n            \"memberName\": \"John Doe\",\n            \"relationship\": \"Son\",\n            \"linkedBy\": \"user_12345\",\n            \"linkedAt\": \"2025-11-03T11:25:00Z\",\n            \"status\": \"active\"\n        },\n         {\n            \"linkId\": \"link_796\",\n            \"deviceId\": \"d003\",\n            \"memberId\": \"member_428\",\n            \"memberName\": \"Chudy Okoli\",\n            \"relationship\": \"Son\",\n            \"linkedBy\": \"user_12345\",\n            \"linkedAt\": \"2025-11-03T11:25:00Z\",\n            \"status\": \"inactive\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Devices - Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Verify status code\r",
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/devices?auth=invalid",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"devices"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": "invalid"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Devices - Get Negative",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/devices?auth=invalid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "auth",
+									"value": "invalid"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 04 Nov 2025 15:23:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "99951cdef9294597-LHR"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=9bda24ed7ef91a51"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=ad1c999a92b76341"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762196567"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "170"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=_rO9rIf1rwV.DwWbEDUAVhJmnZzqWbEYfTX72O5A4UQ-1762196507-1.0.1.1-lZC1g3_3v23dSS11pZ_Dh7W7dW6P2y3n_GpD9takQEZkWO7gUxxU8nGbGOEiPGEG00QFNRmvLjzcYabI1hCAMGphU9M_cYZYQnqfy3GPsyE; path=/; expires=Mon, 03-Nov-25 19:31:47 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=Fj6SGwVBiyhfrow33Y1ScMg.tWMa46voziZ4Tms0whM-1762269808-1.0.1.1-Luu9GBom7kc2H5LuKfi21dSF8ioCl23j9zXpqtVcuLpU4UYaxe020RQqPy5NO79qRn1ON7s1b_QbCKuAVvAwRfjeYYK3mqm5TeKngNYJpJk; path=/; expires=Tue, 04-Nov-25 15:53:28 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"Unauthorized access. Please login again.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Rules - Create or Update Rule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Verify status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// ✅ Confirm response success\r",
+							"pm.test(\"Screen-time rule created successfully\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.include(\"Rule successfully created\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Validate rule fields exist\r",
+							"pm.test(\"Response includes ruleId, memberId, and limitHours\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"ruleId\");\r",
+							"    pm.expect(jsonData).to.have.property(\"memberId\");\r",
+							"    pm.expect(jsonData).to.have.property(\"limitHours\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Store ruleId for future retrieval\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.environment.set(\"ruleId\", jsonData.ruleId);\r",
+							"console.log(\"Saved ruleId:\", jsonData.ruleId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"memberId\": \"m001\",\n  \"limitHours\": 2,\n  \"enabled\": true\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/rules",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rules"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Rules - Create or Update Rule",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"memberId\": \"m001\",\n  \"limitHours\": 2,\n  \"enabled\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/rules",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rules"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 19:47:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=677c54f34c2d4d80"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=10626cde5af80c59"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762199280"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "160"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=BGLgepXlYq3HqTskO1TaCwuqQRXiphJ3E6kDFjXLFiE-1762199220-1.0.1.1-V8RaIXRlPJ_JtObvrrhS0SohO44ceGZ.emvInDJL4FeH21icW6GT1gg0FBZxjEWe1_eMXQdUgZNs4WzDWxVVFu9Xd.v6eu0yrHgMg9UKc_o; path=/; expires=Mon, 03-Nov-25 20:17:00 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998e61840f14befd-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"ruleId\": \"r001\",\n  \"memberId\": \"m001\",\n  \"limitHours\": 2,\n  \"enabled\": true,\n  \"message\": \"Rule successfully created\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Rules - Create Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Verify status code\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"// ✅ Confirm response success\r",
+							"pm.test(\"Member not found\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.include(\"Member not found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"memberId\": \"invalid_member\",\n  \"limitHours\": 2,\n  \"enabled\": true\n}\n"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/rules",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rules"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Rules - Create Negative",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"memberId\": \"invalid_member\",\n  \"limitHours\": 2,\n  \"enabled\": true\n}\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/rules",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rules"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 04 Nov 2025 15:29:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9995259b6f059490-LHR"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=677c54f34c2d4d80"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=10626cde5af80c59"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762199280"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "182"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=BGLgepXlYq3HqTskO1TaCwuqQRXiphJ3E6kDFjXLFiE-1762199220-1.0.1.1-V8RaIXRlPJ_JtObvrrhS0SohO44ceGZ.emvInDJL4FeH21icW6GT1gg0FBZxjEWe1_eMXQdUgZNs4WzDWxVVFu9Xd.v6eu0yrHgMg9UKc_o; path=/; expires=Mon, 03-Nov-25 20:17:00 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=FhJ_Rx7np6hR.KQEIvhPhg3BKOn5nrQUw0YmwPgqAEE-1762270166-1.0.1.1-hnEDPbGVlwPx6L.q2De60OF6l0VNk.TnevcWcUEpiqaiyjEwGQ4ahxjPGhlTmOxWx0N.1asPoL6vvPo7h1_ygCbO.BXvYIi.DGNe7WznUWE; path=/; expires=Tue, 04-Nov-25 15:59:26 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"status\": \"error\",\n  \"message\": \"Member not found. Unable to create or update rule.\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Rules - Get Rule by Member ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Check status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// ✅ Confirm response indicates success\r",
+							"pm.test(\"Rules retrieved successfully\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"    pm.expect(jsonData.message).to.include(\"Rules retrieved successfully\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Verify rules object structure\r",
+							"pm.test(\"Rules object contains required fields\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"rules\");\r",
+							"    pm.expect(jsonData.rules).to.have.property(\"memberId\");\r",
+							"    pm.expect(jsonData.rules).to.have.property(\"limitHours\");\r",
+							"    pm.expect(jsonData.rules).to.have.property(\"enabled\");\r",
+							"});\r",
+							"\r",
+							"// ✅ Optional: Store limitHours or enabled value for further assertions\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.environment.set(\"limitHours\", jsonData.rules.limitHours);\r",
+							"console.log(\"Saved limitHours:\", jsonData.rules.limitHours);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/rules/{{memberId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rules",
+						"{{memberId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Rules - Get Rule by Member ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/rules/{{memberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rules",
+								"{{memberId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 20:03:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=e950cb9a30995156"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=76630ad026d0f73b"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762200269"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "165"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=m89iTRlp1fv1KE_N.8re2MFsMM8SDpnHgPmc65rIem4-1762200209-1.0.1.1-fc9RfZnwdZG.i95UL80NpJmbop.oxe9YnVkB7l5aGs7uZVKtMtY5IsaV1dJJF1KLmTp7z8qNC3mLKC._mxtC9vTuOdXoKtqxB0gEZxncvDU; path=/; expires=Mon, 03-Nov-25 20:33:29 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998e79ac5ffc63ed-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"success\",\n  \"message\": \"Rules retrieved successfully\",\n  \"rules\": {\n    \"memberId\": \"m001\",\n    \"limitHours\": 2,\n    \"enabled\": true\n  }\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Reports - Get Daily Reports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Verify status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/reports/daily",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"reports",
+						"daily"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Reports - Get Daily Reports",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/reports/daily",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"daily"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 03 Nov 2025 20:05:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=91d6a159fd61c291"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=f01a089d86504843"
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "x-ratelimit-limit",
+							"value": "120"
+						},
+						{
+							"key": "x-ratelimit-remaining",
+							"value": "119"
+						},
+						{
+							"key": "x-ratelimit-reset",
+							"value": "1762200390"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"f3-HBiIyJWUHUWX/oPT7Emp7x0Nxms\""
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "176"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "__cf_bm=0Wgq1ISHaZ0rMsYK4xfA8k4BSOqK3k8QlsJNe72K2Ik-1762200330-1.0.1.1-psyVr.eZ5m42wDZLntk2cjWlfXLbVm1rLLdLVI1KdVeqCNpl7KsJ.GrdUurCFUtwD_wWjY2S7Nn7AbprrezNa5gPwRpKmbXKippv4W5aoAg; path=/; expires=Mon, 03-Nov-25 20:35:30 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "998e7c9cba607761-LHR"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"status\": \"success\",\n  \"date\": \"2025-11-03\",\n  \"summary\": [\n    {\n      \"memberId\": \"m001\",\n      \"memberName\": \"Emma Doe\",\n      \"totalHoursUsed\": 1.5,\n      \"limitHours\": 2,\n      \"status\": \"within limit\"\n    },\n    {\n      \"memberId\": \"m002\",\n      \"memberName\": \"John Doe\",\n      \"totalHoursUsed\": 3,\n      \"limitHours\": 2,\n      \"status\": \"limit exceeded\"\n    }\n  ]\n}\n"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "mockedToken"
+		},
+		{
+			"key": "memberId",
+			"value": "m001"
+		}
+	]
+}

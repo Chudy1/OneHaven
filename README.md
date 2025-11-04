@@ -22,7 +22,7 @@ It includes both positive (happy path) and negative test cases for all endpoints
 
 3. Run the collection:
 
-- newman run automation/OneHaven_QA_Challenge_Mock_API.postman_collection.json -e automation/OneHaven.postman_environment.json -r cli,html --reporter-html-export results/newman-report.html
+- newman run automation/OneHaven_QA_Challenge_Mock_API.postman_collection.json -e automation/OneHaven.postman_environment.json -r cli
 
 4. View the results:
 

@@ -23,4 +23,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman collection
-        run: newman run "automation/OneHaven_QA_Challenge_Mock_API.postman_collection.json -e automation/OneHaven.postman_environment.json"
+        run: newman run "automation/OneHaven_QA_Challenge_Mock_API.postman_collection.json" -e "automation/OneHaven.postman_environment.json"

@@ -53,3 +53,7 @@ It includes both positive (happy path) and negative test cases for all endpoints
 ## Statement of use
 
 - No AI-generated tests or code were submitted without my understanding and verification.
+
+## CI/CD Process
+
+- Github actions is used and the yaml file is at .github\workflows\api-tests.yml

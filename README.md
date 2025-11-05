@@ -35,3 +35,21 @@ It includes both positive (happy path) and negative test cases for all endpoints
 - Test Cases (Excel)
 - Postman Collection and Environment
 - Newman Report
+
+## AI Usage Summary
+
+# Tool used: ChatGPT (OpenAI)
+
+- What I used it for:
+
+- Drafting and refining the overall test plan and the README content.
+
+- Generating the PDF version of the Test Plan.
+
+## How I validated and edited the AI outputs
+
+- I manually reviewed every piece of AI-generated content before using it in the project.
+
+## Statement of use
+
+- No AI-generated tests or code were submitted without my understanding and verification.
